@@ -11,6 +11,7 @@ body {
     align-items: center;
     height: 100vh;
     background: #f4f4f4;
+    flex-direction: column;
 }
 
 .container {
@@ -75,4 +76,8 @@ button:hover {
 .page-btn.active {
     background: #007BFF;
     color: white;
+}
+
+input[type="file"] {
+    margin-bottom: 10px;
 }
