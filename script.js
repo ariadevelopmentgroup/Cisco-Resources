@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const nextBtn = document.getElementById("nextBtn");
     const paginationContainer = document.getElementById("pagination");
     const fullscreenBtn = document.getElementById("fullscreenBtn");
+    const card = document.getElementById("card");
 
     let slides = [];
     let currentSlide = 0;
@@ -11,8 +12,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     async function loadMarkdown() {
         try {
             const response = await fetch("slides.md");
+            if (!response.ok) throw new Error("Ֆայլը չի գտնվել");
             const text = await response.text();
-            slides = text.split("\n---\n"); // Բաժանումն ըստ "---"
+            slides = text.split("\n---\n"); // Բաժանում "---" սիմվոլով
             renderSlide();
             renderPagination();
         } catch (error) {
@@ -65,7 +67,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     fullscreenBtn.addEventListener("click", () => {
         if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
+            card.requestFullscreen();
         } else {
             document.exitFullscreen();
         }
