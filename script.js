@@ -5,21 +5,32 @@ document.addEventListener("DOMContentLoaded", async function () {
     const paginationContainer = document.getElementById("pagination");
     const fullscreenBtn = document.getElementById("fullscreenBtn");
     const card = document.getElementById("card");
+    const fileInput = document.getElementById("fileInput");
 
     let slides = [];
     let currentSlide = 0;
 
-    async function loadMarkdown() {
+    async function loadMarkdownFromURL(url) {
         try {
-            const response = await fetch("slides.md");
+            const response = await fetch(url);
             if (!response.ok) throw new Error("Ֆայլը չի գտնվել");
             const text = await response.text();
-            slides = text.split("\n---\n"); // Բաժանում "---" սիմվոլով
+            slides = text.split("\n---\n");
             renderSlide();
             renderPagination();
         } catch (error) {
             markdownContainer.innerHTML = "<p>Չհաջողվեց բեռնել Markdown ֆայլը.</p>";
         }
+    }
+
+    function loadMarkdownFromFile(file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            slides = event.target.result.split("\n---\n");
+            renderSlide();
+            renderPagination();
+        };
+        reader.readAsText(file);
     }
 
     function renderSlide() {
@@ -73,5 +84,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     });
 
-    await loadMarkdown();
+    fileInput.addEventListener("change", (event) => {
+        if (event.target.files.length > 0) {
+            loadMarkdownFromFile(event.target.files[0]);
+        }
+    });
+
+    // GitHub-ում տեղադրված ֆայլի URL-ն
+    const githubMarkdownFile = "https://raw.githubusercontent.com/ANUN/PROJECT/main/slides.md";
+    await loadMarkdownFromURL(githubMarkdownFile);
 });
