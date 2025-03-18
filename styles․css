@@ -1,28 +1,80 @@
-.page_404{ padding:40px 0; background:#fff; font-family: 'Arvo', serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-.page_404  img{ width:100%;}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f4f4f4;
+}
 
-.four_zero_four_bg{
- 
- background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
-    height: 400px;
-    background-position: center;
- }
- 
- 
- .four_zero_four_bg h1{
- font-size:80px;
- }
- 
-  .four_zero_four_bg h3{
-			 font-size:80px;
-			 }
-			 
-			 .link_404{			 
-	color: #fff!important;
+.container {
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+}
+
+#fullscreenBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.slider {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#markdown-content {
+    flex: 1;
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+button {
+    background: #007BFF;
+    color: white;
+    border: none;
     padding: 10px 20px;
-    background: #39ac31;
-    margin: 20px 0;
-    display: inline-block;}
-	.contant_box_404{ margin-top:-50px;}
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.pagination {
+    margin-top: 10px;
+}
+
+.page-btn {
+    background: #ddd;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.page-btn.active {
+    background: #007BFF;
+    color: white;
+}
