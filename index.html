@@ -3,24 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markdown Slider</title>
+    <title>Սլայդեր Քարտերով</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <input type="file" id="fileInput" accept=".md">
-        <div class="card" id="card">
-            <button id="fullscreenBtn">⛶</button>
-            <div id="markdown-content"></div>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide" data-index="1">
+                <h2>Քարտ 1</h2>
+                <p>Սա առաջին քարտի բովանդակությունն է։</p>
+            </div>
+            <div class="slide" data-index="2">
+                <h2>Քարտ 2</h2>
+                <p>Սա երկրորդ քարտի բովանդակությունն է։</p>
+            </div>
+            <div class="slide" data-index="3">
+                <h2>Քարտ 3</h2>
+                <p>Սա երրորդ քարտի բովանդակությունն է։</p>
+            </div>
         </div>
-        <div class="controls">
-            <button id="prevBtn">Նախորդ</button>
-            <div class="pagination" id="pagination"></div>
-            <button id="nextBtn">Հաջորդ</button>
-        </div>
+        
+        <button class="prev-btn">Նախորդ</button>
+        <button class="next-btn">Հաջորդ</button>
+        
+        <div class="pagination"></div>
+
+        <button class="fullscreen-btn">🔲 Լիէկրան</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.12/marked.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
