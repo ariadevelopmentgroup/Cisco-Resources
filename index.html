@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markdown Viewer with Slider</title>
+    <title>Markdown Slider</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <button id="fullscreenBtn">⛶</button>
-        <div class="slider">
-            <button id="prevBtn">Նախորդ</button>
+        <div class="card" id="card">
+            <button id="fullscreenBtn">⛶</button>
             <div id="markdown-content"></div>
+        </div>
+        <div class="controls">
+            <button id="prevBtn">Նախորդ</button>
+            <div class="pagination" id="pagination"></div>
             <button id="nextBtn">Հաջորդ</button>
         </div>
-        <div class="pagination" id="pagination"></div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.12/marked.min.js"></script>
