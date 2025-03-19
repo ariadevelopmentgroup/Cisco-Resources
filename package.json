@@ -1,0 +1,16 @@
+{
+  "name": "responsive-web-application",
+  "version": "1.0.0",
+  "description": "A responsive web application that reads markdown code from slider.md and displays it in a card with navigation buttons, pagination, and full-screen support.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "marked": "^2.0.0"
+  },
+  "author": "ariadevelopmentgroup",
+  "license": "ISC"
+}
