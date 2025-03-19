@@ -1,53 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const slides = document.querySelectorAll(".slide");
-    const slider = document.querySelector(".slider");
-    const prevBtn = document.querySelector(".prev-btn");
-    const nextBtn = document.querySelector(".next-btn");
-    const paginationContainer = document.querySelector(".pagination");
-    const fullscreenBtn = document.querySelector(".fullscreen-btn");
+    let slides = [];
+    let currentSlide = 0;
 
-    let currentIndex = 0;
-
-    function updateSlider() {
-        slider.style.transform = translateX(-${currentIndex * 100}%);
-        updatePagination();
-    }
-
-    function updatePagination() {
-        paginationContainer.innerHTML = "";
-        slides.forEach((_, index) => {
-            const dot = document.createElement("span");
-            dot.classList.add("dot");
-            if (index === currentIndex) dot.classList.add("active");
-            dot.addEventListener("click", () => {
-                currentIndex = index;
-                updateSlider();
-            });
-            paginationContainer.appendChild(dot);
+    // Բեռնում ենք slider.md ֆայլը
+    fetch("slider.md")
+        .then(response => response.text())
+        .then(text => {
+            slides = text.split("\n\n---\n\n").map(slide => marked.parse(slide));
+            showSlide(currentSlide);
         });
+
+    function showSlide(index) {
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        currentSlide = index;
+        document.getElementById("content").innerHTML = slides[currentSlide];
+        document.getElementById("pagination").textContent = ${currentSlide + 1} / ${slides.length};
     }
 
-    prevBtn.addEventListener("click", function () {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateSlider();
-        }
-    });
+    document.getElementById("prev").addEventListener("click", () => showSlide(currentSlide - 1));
+    document.getElementById("next").addEventListener("click", () => showSlide(currentSlide + 1));
 
-    nextBtn.addEventListener("click", function () {
-        if (currentIndex < slides.length - 1) {
-            currentIndex++;
-            updateSlider();
-        }
-    });
-
-    fullscreenBtn.addEventListener("click", function () {
+    document.getElementById("fullscreen").addEventListener("click", function () {
+        let elem = document.getElementById("slider-card");
         if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
+            elem.requestFullscreen();
         } else {
             document.exitFullscreen();
         }
     });
-
-    updatePagination();
 });
