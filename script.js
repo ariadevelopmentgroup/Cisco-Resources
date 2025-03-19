@@ -1,28 +1,53 @@
 document.addEventListener("DOMContentLoaded", function () {
-    fetch("slides.md")
-        .then(response => response.text())
-        .then(text => {
-            let slides = text.split("\n---\n"); // Սլայդերը բաժանելու համար օգտագործում ենք "---" բաժանարար
-            let currentSlide = 0;
+    const slides = document.querySelectorAll(".slide");
+    const slider = document.querySelector(".slider");
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+    const paginationContainer = document.querySelector(".pagination");
+    const fullscreenBtn = document.querySelector(".fullscreen-btn");
 
-            function renderSlide() {
-                document.getElementById("slideContent").innerHTML = marked.parse(slides[currentSlide]);
-            }
+    let currentIndex = 0;
 
-            document.getElementById("prevSlide").addEventListener("click", function () {
-                if (currentSlide > 0) {
-                    currentSlide--;
-                    renderSlide();
-                }
+    function updateSlider() {
+        slider.style.transform = translateX(-${currentIndex * 100}%);
+        updatePagination();
+    }
+
+    function updatePagination() {
+        paginationContainer.innerHTML = "";
+        slides.forEach((_, index) => {
+            const dot = document.createElement("span");
+            dot.classList.add("dot");
+            if (index === currentIndex) dot.classList.add("active");
+            dot.addEventListener("click", () => {
+                currentIndex = index;
+                updateSlider();
             });
-
-            document.getElementById("nextSlide").addEventListener("click", function () {
-                if (currentSlide < slides.length - 1) {
-                    currentSlide++;
-                    renderSlide();
-                }
-            });
-
-            renderSlide(); // Սկզբում ցուցադրում ենք առաջին սլայդը
+            paginationContainer.appendChild(dot);
         });
+    }
+
+    prevBtn.addEventListener("click", function () {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateSlider();
+        }
+    });
+
+    nextBtn.addEventListener("click", function () {
+        if (currentIndex < slides.length - 1) {
+            currentIndex++;
+            updateSlider();
+        }
+    });
+
+    fullscreenBtn.addEventListener("click", function () {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    });
+
+    updatePagination();
 });
