@@ -3,34 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Սլայդեր Քարտերով</title>
+    <title>Markdown Slider</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="slider-container">
-        <div class="slider">
-            <div class="slide" data-index="1">
-                <h2>Քարտ 1</h2>
-                <p>Սա առաջին քարտի բովանդակությունն է։</p>
-            </div>
-            <div class="slide" data-index="2">
-                <h2>Քարտ 2</h2>
-                <p>Սա երկրորդ քարտի բովանդակությունն է։</p>
-            </div>
-            <div class="slide" data-index="3">
-                <h2>Քարտ 3</h2>
-                <p>Սա երրորդ քարտի բովանդակությունն է։</p>
-            </div>
+    <div class="container">
+        <div id="slider-card">
+            <div id="content"></div>
         </div>
-        
-        <button class="prev-btn">Նախորդ</button>
-        <button class="next-btn">Հաջորդ</button>
-        
-        <div class="pagination"></div>
-
-        <button class="fullscreen-btn">🔲 Լիէկրան</button>
+        <div class="controls">
+            <button id="prev">Նախորդ</button>
+            <span id="pagination"></span>
+            <button id="next">Հաջորդ</button>
+        </div>
+        <button id="fullscreen">Լիէկրան</button>
     </div>
 
+    <script src="marked.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
