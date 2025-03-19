@@ -1,29 +1,28 @@
-let slides = [];
-let currentIndex = 0;
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("slides.md")
+        .then(response => response.text())
+        .then(text => {
+            let slides = text.split("\n---\n"); // Սլայդերը բաժանելու համար օգտագործում ենք "---" բաժանարար
+            let currentSlide = 0;
 
-// Markdown ֆայլի ներբեռնում
-fetch("slides.md")
-    .then(response => response.text())
-    .then(text => {
-        slides = text.split("\n---\n").map(md => marked.parse(md));
-        showSlide(currentIndex);
-    });
+            function renderSlide() {
+                document.getElementById("slideContent").innerHTML = marked.parse(slides[currentSlide]);
+            }
 
-function showSlide(index) {
-    if (index < 0 || index >= slides.length) return;
-    document.getElementById("slides").innerHTML = slides[index];
-}
+            document.getElementById("prevSlide").addEventListener("click", function () {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    renderSlide();
+                }
+            });
 
-function prevSlide() {
-    if (currentIndex > 0) {
-        currentIndex--;
-        showSlide(currentIndex);
-    }
-}
+            document.getElementById("nextSlide").addEventListener("click", function () {
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    renderSlide();
+                }
+            });
 
-function nextSlide() {
-    if (currentIndex < slides.length - 1) {
-        currentIndex++;
-        showSlide(currentIndex);
-    }
-}
+            renderSlide(); // Սկզբում ցուցադրում ենք առաջին սլայդը
+        });
+});
